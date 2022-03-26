@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class characterMechs : MonoBehaviour
 {
+    SpriteRenderer spriteRenderer;
+    Animator animator;
     public float moveSpeed;
     private Vector3 direction;
     Rigidbody2D rb;
@@ -22,11 +24,14 @@ public class characterMechs : MonoBehaviour
     float currentDashTimer;
     float dashDirection;
     bool isDashing;
+    float slimeLoc;
     public int orantiSabiti;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         Vector3 startingPos = transform.position;
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -55,14 +60,18 @@ public class characterMechs : MonoBehaviour
         movX=Input.GetAxis("Horizontal");
         
         transform.Translate(direction * movX * Time.deltaTime * moveSpeed);
+        if (movX < 0)
+        {
+            transform.localScale = new Vector3(-5,transform.localScale.y,transform.localScale.z);
+        }
+        else if (movX > 0)
+        {
+            transform.localScale = new Vector3(5,transform.localScale.y,transform.localScale.z);
+        }
         if (Time.time > nextActionTime && Input.GetAxis("Horizontal") != 0) 
         {
             nextActionTime += period;
-            
-
             Instantiate(iz,new Vector3(contactObject.x + distanceX , contactObject.y + distanceY, 0), rotation,izler.transform);
-
-            //transform.localScale = new Vector3(transform.localScale.x - scaleDecrease,transform.localScale.y -scaleDecrease,transform.localScale.z -scaleDecrease);
         }
     }
     void OnCollisionEnter2D(Collision2D other)
@@ -73,6 +82,7 @@ public class characterMechs : MonoBehaviour
             direction = -Vector3.up;
             rb.gravityScale = 1;
             rotation = Quaternion.Euler(0, 0, -90);
+            animator.SetFloat("yurumeBlend",1);
         }
         else if(other.gameObject.tag == "right")
         {
