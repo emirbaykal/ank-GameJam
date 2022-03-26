@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class characterMechs : MonoBehaviour
 {
-    float nextScale;
+    flip flip;
     public bool yatay;
     SpriteRenderer spriteRenderer;
     Animator animator;
@@ -17,7 +17,6 @@ public class characterMechs : MonoBehaviour
     public GameObject iz;
     private float nextActionTime = 0.0f;
     public float period = 0.1f;
-    public float scaleDecrease;
     Vector3 izLocation;
     Vector3 contactObject;
     public float movX;
@@ -34,6 +33,7 @@ public class characterMechs : MonoBehaviour
         Vector3 startingPos = transform.position;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        flip = GetComponent<flip>();
     }
 
     void Update()
@@ -42,6 +42,7 @@ public class characterMechs : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            
             isDashing = true;
             currentDashTimer = startDashTimer;
             rb.velocity = Vector2.zero;
@@ -54,6 +55,7 @@ public class characterMechs : MonoBehaviour
 
             if (currentDashTimer <= 0)
             {
+                animator.SetTrigger("dash");
                 isDashing = false; 
             }
         }
@@ -62,7 +64,11 @@ public class characterMechs : MonoBehaviour
     {
         movX=Input.GetAxis("Horizontal");
         
-        transform.Translate(direction * movX * Time.deltaTime * moveSpeed);
+        
+        
+            transform.Translate(direction * movX * Time.deltaTime * moveSpeed);
+        
+        
         if (movX != 0)
         {
             animator.SetBool("isWalk",true);
@@ -75,6 +81,7 @@ public class characterMechs : MonoBehaviour
         {
             nextActionTime += period;
             Instantiate(iz,new Vector3(contactObject.x + distanceX , contactObject.y + distanceY, 0), rotation,izler.transform);
+            //transform.localScale = new Vector3(transform.localScale.x+totalScaleDecrease,transform.localScale.y+totalScaleDecrease,transform.localScale.z+totalScaleDecrease);
         }
     }
     void OnCollisionEnter2D(Collision2D other)
@@ -122,25 +129,25 @@ public class characterMechs : MonoBehaviour
         {
             contactObject.x = collision.transform.position.x;
             contactObject.y = transform.position.y;
-            distanceX = 0.0844f;
+            distanceX = 0.024f;
         }
         else if(collision.gameObject.tag == "right")
         {
             contactObject.x = collision.transform.position.x;
             contactObject.y = transform.position.y;
-            distanceX = -0.0844f;
+            distanceX = -0.024f;
         }
         else if(collision.gameObject.tag == "bottom")
         {
             contactObject.y = collision.transform.position.y;
             contactObject.x = transform.position.x;
-            distanceY = +0.1101f;
+            distanceY = 0.05f;
         }
         else if(collision.gameObject.tag == "top")
         {
             contactObject.y = collision.transform.position.y;
             contactObject.x = transform.position.x;
-            distanceY = -0.1101f;
+            distanceY = -0.05f;
         }
     }
     void OnCollisionExit2D(Collision2D other)
@@ -150,18 +157,6 @@ public class characterMechs : MonoBehaviour
 
         }
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "iz")
-        {
-            uzerinde = true;
-        }
-    }
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.tag == "iz")
-        {
-            uzerinde = false;
-        }
-    }
+
+    
 }
