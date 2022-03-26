@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 public class characterMechs : MonoBehaviour
 {
+    float nextScale;
+    public bool yatay;
     SpriteRenderer spriteRenderer;
     Animator animator;
     public float moveSpeed;
-    private Vector3 direction;
+    public Vector3 direction;
     Rigidbody2D rb;
     Quaternion rotation;
     float distanceX, distanceY;
@@ -18,7 +20,7 @@ public class characterMechs : MonoBehaviour
     public float scaleDecrease;
     Vector3 izLocation;
     Vector3 contactObject;
-    float movX;
+    public float movX;
     public float dashForce;
     public float startDashTimer;
     float currentDashTimer;
@@ -37,6 +39,7 @@ public class characterMechs : MonoBehaviour
     void Update()
     {
         hareket();
+        
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             isDashing = true;
@@ -60,13 +63,13 @@ public class characterMechs : MonoBehaviour
         movX=Input.GetAxis("Horizontal");
         
         transform.Translate(direction * movX * Time.deltaTime * moveSpeed);
-        if (movX < 0)
+        if (movX != 0)
         {
-            transform.localScale = new Vector3(-5,transform.localScale.y,transform.localScale.z);
+            animator.SetBool("isWalk",true);
         }
-        else if (movX > 0)
+        else
         {
-            transform.localScale = new Vector3(5,transform.localScale.y,transform.localScale.z);
+            animator.SetBool("isWalk",false);
         }
         if (Time.time > nextActionTime && Input.GetAxis("Horizontal") != 0) 
         {
@@ -82,7 +85,8 @@ public class characterMechs : MonoBehaviour
             direction = -Vector3.up;
             rb.gravityScale = 1;
             rotation = Quaternion.Euler(0, 0, -90);
-            animator.SetFloat("yurumeBlend",1);
+            animator.SetFloat("yurumeBlend",2);
+            yatay = false;
         }
         else if(other.gameObject.tag == "right")
         {
@@ -90,12 +94,16 @@ public class characterMechs : MonoBehaviour
             direction = Vector3.up;
             rb.gravityScale = 1;
             rotation = Quaternion.Euler(0, 0, 90);
+            animator.SetFloat("yurumeBlend",2);
+            yatay = false;
         }
         else if(other.gameObject.tag == "bottom")
         {
             Vector3 startingPos = transform.position;
             direction = Vector3.right;
             rotation = Quaternion.Euler(0, 0, 0);
+            animator.SetFloat("yurumeBlend",1);
+            yatay = true;
         }
         else if(other.gameObject.tag == "top")
         {
@@ -103,6 +111,8 @@ public class characterMechs : MonoBehaviour
             rb.gravityScale = -1;
             direction = Vector3.right;
             rotation = Quaternion.Euler(0, 0, 180);
+            animator.SetFloat("yurumeBlend",1);
+            yatay = true;
         }
     }
 
