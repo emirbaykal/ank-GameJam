@@ -25,4 +25,5 @@ public class LevelChanger : MonoBehaviour
         int y = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(y + 1);
     }
+    
 }
