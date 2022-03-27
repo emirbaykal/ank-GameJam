@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ui : MonoBehaviour
 {
@@ -47,5 +48,8 @@ public class ui : MonoBehaviour
     {
         Application.Quit();
     }
-    
+    public void playButton()
+    {
+        int y = SceneManager.GetActiveScene().buildIndex; SceneManager.LoadScene(y + 1);
+    }
 }

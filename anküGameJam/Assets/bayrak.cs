@@ -12,8 +12,15 @@ public class bayrak : MonoBehaviour
         if (col.gameObject.CompareTag("Player"))
         {
             Animator.SetBool("bayrak",true);
-            int y = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(y + 1);
+
+            StartCoroutine(FlagControl());
         }
+
+    }
+    IEnumerator FlagControl()
+    {
+        yield return new WaitForSeconds(2);
+        int y = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(y + 1);
     }
 }
