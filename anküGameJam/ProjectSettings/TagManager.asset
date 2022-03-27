@@ -9,6 +9,8 @@ TagManager:
   - left
   - top
   - iz
+  - fastGround
+  - bayrak
   layers:
   - Default
   - TransparentFX

@@ -11,7 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/test2.unity
     guid: 10619b9ac92bea84aba67474d5ed0a1c
+  - enabled: 1
+    path: Assets/Scenes/Emir3.unity
+    guid: dd204f2a0a02fbe4282216b2f90c200b
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Emir2.unity
+    guid: ee5064a91aa10484a9a7b3ce1f8a4f8f
   m_configObjects: {}
