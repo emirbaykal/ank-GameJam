@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class characterMechs : MonoBehaviour
 {
+    public BoxCollider2D boxcol,dokscol;
     flip flip;
     public bool yatay;
     SpriteRenderer spriteRenderer;
@@ -20,6 +21,7 @@ public class characterMechs : MonoBehaviour
     Vector3 izLocation;
     Vector3 contactObject;
     public float movX;
+    public float movY;
     public float dashForce;
     public float startDashTimer;
     float currentDashTimer;
@@ -59,17 +61,23 @@ public class characterMechs : MonoBehaviour
                 isDashing = false; 
             }
         }
+        
     }
     void hareket()
     {
         movX=Input.GetAxis("Horizontal");
-        
-        
-        
-            transform.Translate(direction * movX * Time.deltaTime * moveSpeed);
-        
-        
-        if (movX != 0)
+        movY=Input.GetAxis("Vertical");
+        if (yatay == true)
+        {
+            transform.Translate(direction * Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed);
+            movY = 0;
+        }
+        else
+        {
+            transform.Translate(direction * Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
+            movX = 0;
+        }
+        if (movX != 0 || movY != 0)
         {
             animator.SetBool("isWalk",true);
         }
@@ -85,32 +93,46 @@ public class characterMechs : MonoBehaviour
         }
     }
     void OnCollisionEnter2D(Collision2D other)
-    {
+    {   
+        
         if (other.gameObject.tag == "left")
         {
+            spriteRenderer.flipY = false;
             Vector3 startingPos = transform.position;
-            direction = -Vector3.up;
+            direction = Vector3.up;
             rb.gravityScale = 1;
             rotation = Quaternion.Euler(0, 0, -90);
-            animator.SetFloat("yurumeBlend",2);
+            animator.SetFloat("yurumeBlend",1);
+            animator.SetFloat("idleBlend",1);
             yatay = false;
+            animator.SetTrigger("reverseicKose");
+            rb.drag = 50;
+        
         }
         else if(other.gameObject.tag == "right")
         {
+            //GetComponent<BoxCollider2D>().offset = new Vector2(0.06391939f,GetComponent<BoxCollider2D>().offset.y);
+            spriteRenderer.flipY = false;
+            animator.SetTrigger("icKose");
+            Debug.Log("asd");
             Vector3 startingPos = transform.position;
             direction = Vector3.up;
             rb.gravityScale = 1;
             rotation = Quaternion.Euler(0, 0, 90);
-            animator.SetFloat("yurumeBlend",2);
+            animator.SetFloat("yurumeBlend",1);
             yatay = false;
+            animator.SetFloat("idleBlend",1);
+            rb.drag = 50;
         }
         else if(other.gameObject.tag == "bottom")
         {
+            spriteRenderer.flipY = false;
             Vector3 startingPos = transform.position;
             direction = Vector3.right;
             rotation = Quaternion.Euler(0, 0, 0);
-            animator.SetFloat("yurumeBlend",1);
+            animator.SetFloat("yurumeBlend",0);
             yatay = true;
+            animator.SetFloat("idleBlend",0);
         }
         else if(other.gameObject.tag == "top")
         {
@@ -118,8 +140,9 @@ public class characterMechs : MonoBehaviour
             rb.gravityScale = -1;
             direction = Vector3.right;
             rotation = Quaternion.Euler(0, 0, 180);
-            animator.SetFloat("yurumeBlend",1);
+            animator.SetFloat("yurumeBlend",0);
             yatay = true;
+            animator.SetFloat("idleBlend",0);
         }
     }
 
@@ -154,9 +177,18 @@ public class characterMechs : MonoBehaviour
     {
         if (other.gameObject.tag == "right" || other.gameObject.tag == "left")
         {
-
+            rb.drag = 0;
         }
     }
 
-    
+    public void doksanDonme()
+    {
+        boxcol.enabled = false;
+        dokscol.enabled = true;
+    }
+    public void duz()
+    {
+        boxcol.enabled = true;
+        dokscol.enabled = false;
+    }
 }

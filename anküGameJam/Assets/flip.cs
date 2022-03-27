@@ -41,7 +41,11 @@ public class flip : MonoBehaviour
                 nextScale.x = -(nextScale.x);
             }
         }
-        transform.localScale = nextScale;
+        if (cmechs.yatay == true)
+        {
+            transform.localScale = nextScale;
+        }
+        
         //Debug.Log(nextScale);
 
         if (cmechs.movX != 0)
@@ -61,5 +65,27 @@ public class flip : MonoBehaviour
                 }
             }
         }
+
     }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        //if (other.gameObject.tag == "left")
+        //{
+        //    transform.rotation = Quaternion.Euler(0, 0, -90);
+        //}
+        //if (other.gameObject.tag == "top")
+        //{
+        //    transform.rotation = Quaternion.Euler(0, 0, 180);
+        //}
+        //if (other.gameObject.tag == "right")
+        //{
+        //    transform.rotation = Quaternion.Euler(0, 0, 90);
+        //}
+        //if (other.gameObject.tag == "bottom")
+        //{
+        //    transform.rotation = Quaternion.Euler(0, 0, 0);
+        //}
+    }
+    
 }
