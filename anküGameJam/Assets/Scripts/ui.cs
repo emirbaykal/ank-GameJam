@@ -50,6 +50,7 @@ public class ui : MonoBehaviour
     }
     public void playButton()
     {
-        int y = SceneManager.GetActiveScene().buildIndex; SceneManager.LoadScene(y + 1);
+        int y = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(y + 1);
     }
 }
