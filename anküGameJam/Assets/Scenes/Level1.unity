@@ -312,7 +312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 209140317}
   - component: {fileID: 209140316}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left (1)
   m_TagString: left
   m_Icon: {fileID: 0}
@@ -359,38 +359,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &232229484 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8569216861943851558, guid: 8f764ac71d510d04dac7b8f9f52a16b0, type: 3}
-  m_PrefabInstance: {fileID: 405512412}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &232229489 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8569216861943851559, guid: 8f764ac71d510d04dac7b8f9f52a16b0, type: 3}
-  m_PrefabInstance: {fileID: 405512412}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232229484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1ee1e4aa871ffc4ebbaf26a7625513d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &232229491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232229484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5998494ed165264a9e7ec43e189a901, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bitti: 1
-  cmechs: {fileID: 232229489}
-  scaleDecrease: 0
-  totalScaleDecrease: 0
 --- !u!1 &268989201
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,14 +637,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: slime
       objectReference: {fileID: 0}
-    - target: {fileID: 8569216861943851558, guid: 8f764ac71d510d04dac7b8f9f52a16b0, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8569216861943851559, guid: 8f764ac71d510d04dac7b8f9f52a16b0, type: 3}
-      propertyPath: izler
-      value: 
-      objectReference: {fileID: 1458980017}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f764ac71d510d04dac7b8f9f52a16b0, type: 3}
 --- !u!4 &405512413 stripped
@@ -694,7 +654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 412833275}
   - component: {fileID: 412833274}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right (2)
   m_TagString: right
   m_Icon: {fileID: 0}
@@ -751,7 +711,7 @@ GameObject:
   m_Component:
   - component: {fileID: 425083891}
   - component: {fileID: 425083890}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right
   m_TagString: right
   m_Icon: {fileID: 0}
@@ -808,7 +768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 458940464}
   - component: {fileID: 458940463}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -852,7 +812,7 @@ GameObject:
   m_Component:
   - component: {fileID: 481153175}
   - component: {fileID: 481153174}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right (3)
   m_TagString: right
   m_Icon: {fileID: 0}
@@ -929,7 +889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bitti: 1
-  cmechs: {fileID: 232229489}
+  cmechs: {fileID: 0}
   scaleDecrease: 0
   totalScaleDecrease: 0
 --- !u!4 &512469701
@@ -1135,7 +1095,7 @@ GameObject:
   m_Component:
   - component: {fileID: 905075001}
   - component: {fileID: 905075000}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right (5)
   m_TagString: right
   m_Icon: {fileID: 0}
@@ -1192,7 +1152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 941697378}
   - component: {fileID: 941697377}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left
   m_TagString: left
   m_Icon: {fileID: 0}
@@ -1249,7 +1209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 979814050}
   - component: {fileID: 979814049}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right (1)
   m_TagString: right
   m_Icon: {fileID: 0}
@@ -1306,7 +1266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1018401044}
   - component: {fileID: 1018401043}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left (2)
   m_TagString: left
   m_Icon: {fileID: 0}
@@ -1421,7 +1381,7 @@ GameObject:
   - component: {fileID: 1062229667}
   - component: {fileID: 1062229669}
   - component: {fileID: 1062229668}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BlueMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1729,7 +1689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1235144989}
   - component: {fileID: 1235144988}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IcedWall (1)
   m_TagString: yapismaz
   m_Icon: {fileID: 0}
@@ -8091,7 +8051,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1708421332}
   - component: {fileID: 1708421331}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IcedWall
   m_TagString: yapismaz
   m_Icon: {fileID: 0}
@@ -8461,7 +8421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1803667358}
   - component: {fileID: 1803667357}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right (4)
   m_TagString: right
   m_Icon: {fileID: 0}
