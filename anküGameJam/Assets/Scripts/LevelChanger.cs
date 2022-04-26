@@ -8,10 +8,10 @@ public class LevelChanger : MonoBehaviour
     public Animator Animator;
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            nextLevel();
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    nextLevel();
+        //}
     }
 
     public void nextLevel()

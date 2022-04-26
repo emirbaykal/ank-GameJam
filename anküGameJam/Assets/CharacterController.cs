@@ -54,7 +54,7 @@ public class CharacterController : MonoBehaviour
 
 
         
-        if (onWall) WallRun();
+        if (wallRun) WallRun();
         if (onTopWall) TopRun();
 
 
@@ -92,8 +92,8 @@ public class CharacterController : MonoBehaviour
 
     public void WallRun()
     {
-        
-        GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, verticalDirection * maxMoveSpeed * wallRunModifier);
+        _horizontalDirection = 0;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, verticalDirection * maxMoveSpeed * wallRunModifier);
         
 
     }
@@ -144,10 +144,13 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         CollisionDetect();
-        _horizontalDirection = GetInput().x;
+        
         verticalDirection = GetInput().y;
 
-        
+        if (onWall == false)
+        {
+            _horizontalDirection = GetInput().x;
+        }
         
     }
 }
