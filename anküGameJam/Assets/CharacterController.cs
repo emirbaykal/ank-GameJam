@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-
-
+    public float thurst;
+    Animator anim;
     public TavanController tavancollider;
 
 
@@ -18,6 +18,8 @@ public class CharacterController : MonoBehaviour
 
     public bool onWall;
     public bool _onRightWall;
+    public bool onTopWall;
+    public bool onGround;
 
     public float  maxMoveSpeed;
 
@@ -26,20 +28,37 @@ public class CharacterController : MonoBehaviour
     float wallRunModifier = 0.85f;
 
     bool wallRun => onWall && verticalDirection > 0f;
+    bool toprun => onTopWall && _horizontalDirection != 0f;
 
 
     public Rigidbody2D _rb;
 
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+    }
     private void FixedUpdate()
     {
+        _rb = GetComponent<Rigidbody2D>();
         _rb.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
 
         if (Mathf.Abs(_rb.velocity.x) > maxMoveSpeed)
             _rb.velocity = new Vector2(Mathf.Sign(_rb.velocity.x) * maxMoveSpeed, _rb.velocity.y);
-        CollisionDetect();
-        _rb = GetComponent<Rigidbody2D>();
-        if (wallRun) WallRun();
+
         
+        
+
+
+      
+
+
+        
+        if (onWall) WallRun();
+        if (onTopWall) TopRun();
+
+
+
     }
    
     void StickToWall()
@@ -73,56 +92,47 @@ public class CharacterController : MonoBehaviour
 
     public void WallRun()
     {
+        
+        GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, verticalDirection * maxMoveSpeed * wallRunModifier);
+        
 
-      
-            GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, verticalDirection * maxMoveSpeed * wallRunModifier);
-        
-        
     }
-
-    void Tavan()
+    public void TopRun()
     {
-        if(tavancollider.tavandayim == true)
-        {
 
-            _rb.gravityScale = -1;
-        }
-        else
-        {
-            _rb.gravityScale = 1;
-        }
+        GetComponent<Rigidbody2D>().velocity = new Vector2(_horizontalDirection * maxMoveSpeed * wallRunModifier, GetComponent<Rigidbody2D>().velocity.y);
+            GetComponent<Rigidbody2D>().AddForce(Vector2.up * thurst);
 
 
     }
+
+
+
+
     void CollisionDetect()
     {
 
         onWall = Physics2D.Raycast(transform.position, Vector2.right, wallRayCastLength, wallLayer) ||
-            Physics2D.Raycast(transform.position, Vector2.left, wallRayCastLength, wallLayer) || 
-            Physics2D.Raycast(transform.position, Vector2.up, wallRayCastLength, wallLayer)
+            Physics2D.Raycast(transform.position, Vector2.left, wallRayCastLength, wallLayer)
+            
             ;
 
         _onRightWall = Physics2D.Raycast(transform.position, Vector2.right, wallRayCastLength, wallLayer);
+        onTopWall = Physics2D.Raycast(transform.position, Vector2.up, wallRayCastLength, wallLayer);
 
 
         //wall check
-       // Gizmos.DrawLine(transform.position, transform.position + Vector3.right * wallRayCastLength);
-       // Gizmos.DrawLine(transform.position, transform.position + Vector3.left * wallRayCastLength);
-
-    }
-    void Start()
-    {
+        // Gizmos.DrawLine(transform.position, transform.position + Vector3.right * wallRayCastLength);
+        // Gizmos.DrawLine(transform.position, transform.position + Vector3.left * wallRayCastLength);
 
     }
 
-    void tavandadeilsem()
+    private void OnDrawGizmos()
     {
-
-
-        if (onWall == true)
-        {
-            tavancollider.tavandayim = false;
-        }
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.left * wallRayCastLength);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * wallRayCastLength);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.up * wallRayCastLength);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * wallRayCastLength);
     }
 
     private Vector2 GetInput()
@@ -133,11 +143,11 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CollisionDetect();
         _horizontalDirection = GetInput().x;
         verticalDirection = GetInput().y;
 
-        Tavan();
-        //tavandadeilsem();
+        
+        
     }
 }
